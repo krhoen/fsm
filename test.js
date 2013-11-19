@@ -39,6 +39,7 @@ function draw() {
   ctx.fillRect(0,0,canvas.width,canvas.height);
   
   squareFSM.update();
+  ctx.fillRect(50,50,100,100);
 }
 
 setInterval(draw(), 1000/60);
