@@ -2,12 +2,12 @@
 // referenced implementation from textbook
 // State, Transition, Finite State Machine
 
-function State(action, entryAction, exitAction, transitions) {
+function State(action, entryAction, exitAction) {
 	this.action = action;
 	this.entryAction = action;
 	this.exitAction = action;
-	this.transitions = transitions;
 	
+	this.setTransitions = function(trans) {this.transitions=trans};
 	this.getAction = function() {return this.action;}
 	this.getEntryAction = function() {return this.entryAction;}
 	this.getExitAction = function() {return this.exitAction;}
