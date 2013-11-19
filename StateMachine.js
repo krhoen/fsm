@@ -21,7 +21,7 @@ function Transition(targetState, action, condition) {
 	
 	this.getTargetState = function() {return this.targetState;}
 	this.getAction = function() {return this.action;}
-	this.isTriggered = function(game) {return condition);}
+	this.isTriggered = function() {return condition;)}
 }
 
 function StateMachine(currentState) {
