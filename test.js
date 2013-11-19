@@ -15,15 +15,21 @@ var fiveSeconds = function() {
   return false;
 }
 
+//Transition lists
+var redTrans = new Array();
+var blackTrans = new Array();
+
+//States
+redSquare = new State(ctx.fillStyle="#f00", null, null);
+blueSquare = new State(ctx.fillStyle="#000", null, null);
+
 //Transitions
 var timerDone = new Transition(redSquare, ctx.fillStyle="#fff");
 var countDone = new Transition(blackSquare, ctx.fillStyle="#fff");
-var redTrans = new Array(countDone);
-var blackTrans = new Array(timerDone);
-
-//States
-var redSquare = new State(ctx.fillStyle="#f00", null, null, redTrans);
-var blueSquare = new State(ctx.fillStyle="#000", null, null, blackTrans);
+redTrans.push(countDone);
+blackTrans.push(timerDone);
+redSquare.setTransitions(redTrans);
+blackSquare.setTransitions(blackTrans);
 
 //SateMachine
 var squareFSM = new StateMachine(redSquare);
