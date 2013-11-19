@@ -33,7 +33,7 @@ function StateMachine(currentState) {
 		var targetState;
 		
 		for(trans in currentState.getTransitions()) {
-			if (trans.isTriggered(game)) {
+			if (trans.isTriggered()) {
 				this.transition = trans;
 				break;
 			}
