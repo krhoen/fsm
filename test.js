@@ -2,7 +2,7 @@
 //For testing StateMachine.js
 
 var canvas = document.getElementById("canvas");
-var ctx = canvas.getCOntext("2d");
+var ctx = canvas.getContext("2d");
 
 //Condition - have 5 seconds elapsed?
 var counter = 5000;
