@@ -21,7 +21,7 @@ var blackTrans = new Array();
 
 //States
 redSquare = new State(ctx.fillStyle="#f00", null, null);
-blueSquare = new State(ctx.fillStyle="#000", null, null);
+blackSquare = new State(ctx.fillStyle="#000", null, null);
 
 //Transitions
 var timerDone = new Transition(redSquare, ctx.fillStyle="#fff");
