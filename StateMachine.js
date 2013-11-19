@@ -15,7 +15,7 @@ function State(action, entryAction, exitAction, transitions) {
 }
 
 function Transition(targetState, action, condition) {
-	this.targetState = state;
+	this.targetState = targetState;
 	this.action = action;
 	this.condition = condition;
 	
