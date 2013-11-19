@@ -3,43 +3,66 @@
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#eee";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "#555";
+  ctx.fillRect(50,50,100,100);
 
 //Condition - have 5 seconds elapsed?
-var counter = 5000;
-var fiveSeconds = function() {
-  if (counter <= 0) {
-    counter = 5000;
-    return true;
-  }
-  counter--;
-  return false;
-}
+var fiveSeconds = new Condition();
+fiveSeconds.counter = 10;
+fiveSeconds.test = function() {
+	if (this.counter <= 0) {
+		this.counter = 10;
+		return true;
+	}
+	this.counter--;
+	return false;
+};
+
+//actions
+var blacken = function() {console.log("blackened");};
+var redden = function() {console.log("reddened");};
+var whiten = function() {console.log("whitened");};
 
 //Transition lists
 var redTrans = new Array();
 var blackTrans = new Array();
 
 //States
-redSquare = new State(ctx.fillStyle="#f00", null, null);
-blackSquare = new State(ctx.fillStyle="#000", null, null);
+redSquare = new State();
+redSquare.setAction = redden;
+redSquare.setEntryAction = whiten;
+redSquare.setExitAction = whiten;
+blackSquare = new State();
+blackSquare.setAction = blacken;
+blackSquare.setEntryAction = whiten;
+blackSquare.setExitAction = whiten;
 
 //Transitions
-var timerDone = new Transition(redSquare, ctx.fillStyle="#fff");
-var countDone = new Transition(blackSquare, ctx.fillStyle="#fff");
+var timerDone = new Transition();
+timerDone.setTargetState(redSquare);
+timerDone.action = whiten;
+timerDone.setCondition(fiveSeconds);
+var countDone = new Transition();
+countDone.setTargetState(blackSquare);
+countDone.action = whiten;
+countDone.setCondition(fiveSeconds);
+
 redTrans.push(countDone);
 blackTrans.push(timerDone);
 redSquare.setTransitions(redTrans);
 blackSquare.setTransitions(blackTrans);
 
-//SateMachine
-var squareFSM = new StateMachine(redSquare);
+//StateMachine
+var squareFSM = new StateMachine();
+squareFSM.setCurrentState(redSquare);
 
 function draw() {
-  ctx.fillStyle = "#eee";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  
-  squareFSM.update();
-  ctx.fillRect(50,50,100,100);
+	squareFSM.update();
+	if (squareFSM.getCurrentState() == redSquare) {ctx.fillStyle="#f00";}
+	else {ctx.fillStyle="#000";}
+	ctx.fillRect(50,50,100,100);
 }
 
-setInterval(draw(), 1000/60);
+var running = setInterval(function() {draw()}, 100);
