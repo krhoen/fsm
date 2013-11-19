@@ -32,7 +32,7 @@ function StateMachine(currentState) {
 		var transition = null;
 		var targetState;
 		
-		for(trans in currentState.getTransitions()) {
+		for(var trans in currentState.getTransitions()) {
 			if (trans.isTriggered()) {
 				this.transition = trans;
 				break;
